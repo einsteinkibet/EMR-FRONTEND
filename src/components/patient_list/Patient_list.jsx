@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './Patient_list.css';
 
 const Patient_list = () => {
   const [patients, setPatients] = useState([]);
@@ -39,22 +40,24 @@ const Patient_list = () => {
   };
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h2>Patient List</h2>
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+    <div className="patient-list-container">
+      <h2 className='title'>Patient List</h2>
+      <ol className="patient-list">
         {patients.map(patient => (
-          <li key={patient.PatientID} style={{ margin: '10px', padding: '10px', border: '1px solid #ccc', borderRadius: '5px' }}>
-            <p>
+          <li key={patient.PatientID} className="patient-item">
+            <div className="patient-info">
               <strong>{patient.FirstName} {patient.LastName}</strong>
-            </p>
-            <p>{patient.Description || 'No description available'}</p>
-            {canEditDescription() && (
-              <Link to={`/patients/${patient.PatientID}/edit-description`}>Edit Description</Link>
-            )}
-            <Link to={`/patients/${patient.PatientID}`}>View Details</Link>
+              <p>{patient.Description || 'No description available'}</p>
+            </div>
+            <div className="patient-actions">
+              {canEditDescription() && (
+                <Link to={`/patients/${patient.PatientID}/edit_description`} className="action-link">Edit Description</Link>
+              )}
+              <Link to={`/patients/${patient.PatientID}`} className="action-link">View Details</Link>
+            </div>
           </li>
         ))}
-      </ul>
+      </ol>
     </div>
   );
 };

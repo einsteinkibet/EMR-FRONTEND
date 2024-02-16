@@ -1,42 +1,70 @@
-// EditDescription.jsx
-import React, { useState } from 'react';
+// EditDescription.js
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import './Edit_description.css';
 
-const EditDescription = () => {
-  const { id } = useParams();
+const Edit_description = () => {
+  const { PatientID } = useParams();
+  const [patient, setPatient] = useState(null);
   const [editedDescription, setEditedDescription] = useState('');
+  const [descriptionEdited, setDescriptionEdited] = useState(false);
 
-  const handleSave = async () => {
+  useEffect(() => {
+    const fetchPatient = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5555/patient/patients/${PatientID}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setPatient(data);
+        setEditedDescription(data.Description || ''); // Initialize editedDescription with the current description
+      } catch (error) {
+        console.error('Error fetching patient data:', error);
+      }
+    };
+
+    fetchPatient();
+  }, [PatientID]);
+
+  const handleDescriptionChange = (e) => {
+    setEditedDescription(e.target.value);
+    setDescriptionEdited(true); // Mark the description as edited
+  };
+
+  const handleDescriptionSubmit = async () => {
     try {
-      // Save edited description to the backend using the patient ID
-      const response = await fetch(`http://127.0.0.1:5555/patient/patients/${id}/edit-description`, {
-        method: 'PUT',
+      const response = await fetch(`http://127.0.0.1:5555/patient/patients/${PatientID}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ description: editedDescription }),
+        body: JSON.stringify({ Description: editedDescription }),
       });
-
       if (response.ok) {
-        console.log('Description saved successfully!');
+        alert('Description updated successfully!');
+        // You can handle the transfer of the edited patient to the doctor's dashboard here
       } else {
-        console.error('Failed to save description');
+        alert('Failed to update description. Please try again.');
+        await onDescriptionUpdate(patient.PatientID, editedDescription);
+
       }
     } catch (error) {
-      console.error('Error saving description:', error);
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
     }
   };
 
   return (
     <div>
-      <h2>Edit Description</h2>
-      <textarea
-        value={editedDescription}
-        onChange={(e) => setEditedDescription(e.target.value)}
-      />
-      <button onClick={handleSave}>Save Description</button>
+      <h1>Edit Description</h1>
+      <h2>{patient && `${patient.FirstName} ${patient.LastName}`}</h2>
+      <p><strong>Description:</strong></p>
+      <textarea value={editedDescription} onChange={handleDescriptionChange}></textarea>
+      <br />
+      <button onClick={handleDescriptionSubmit}>Submit</button>
     </div>
   );
 };
 
-export default EditDescription;
+export default Edit_description;

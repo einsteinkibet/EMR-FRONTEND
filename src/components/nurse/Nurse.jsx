@@ -2,13 +2,15 @@
 import React from 'react';
 import Patient_list from '../patient_list/Patient_list';
 import Patient_details from '../patient_details/Patient_details';
+import { Link } from 'react-router-dom';
+import './Nurse.css'
 
 const Nurse = () => {
   return (
     <div>
-      <h1>Nurse Dashboard</h1>
+      <h1 className='nurse-title'>Nurse Dashboard</h1>
       <Patient_list />
-      {/* Link to patient details or edit form */}
+      <Link to="/edit-description/:patientID">Edit Description</Link>
     </div>
   );
 };
