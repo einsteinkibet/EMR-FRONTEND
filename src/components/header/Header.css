@@ -1,31 +1,46 @@
-.header{
-    background:  rgba(67, 67, 67, 0.9);
-    color: white;
-    display: flex;
-   justify-content: space-between;
-   height: 50px;
-   padding-top: 10px;
-   position: fixed;
-   top: 0;
-  width: 100%;
-  z-index: 100;
-  }
-  
-  ul{
-      list-style-type: none;
-  }
-  li {
-    list-style-type: none;
-    display: inline-block;
-    font-size: larger;
-    color: white;
-    margin-right: 20px;
-    text-decoration: none;
-  }
-  .nav-link{
-   color: white;
-   text-decoration: none;
-  }
-  .nav-link:hover{
-    border-bottom: 4px solid burlywood;
-  }
+/* Header.css */
+.header {
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Text color */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px; /* Adjusted padding */
+  margin: 0; /* Remove margin to prevent overflow */
+  position: fixed; /* Fixed position */
+  top: 0; /* Align at the top of the viewport */
+  left: 0; /* Align at the left of the viewport */
+  width: 100vw; /* Full width of the viewport */
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+.logo {
+  font-size: 1.5rem; /* Adjust font size */
+  font-weight: bold; /* Bold font */
+}
+
+.nav-links ul {
+  list-style: none; /* Remove default list styles */
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links ul li {
+  display: inline-block; /* Display navigation links horizontally */
+  margin-right: 20px; /* Spacing between navigation links */
+}
+
+.nav-link {
+  color: #fff; /* Text color */
+  text-decoration: none; /* Remove underline from links */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.nav-link:hover {
+  color: #ffd700; /* Change color on hover */
+}
+
+/* Adjust content spacing to prevent overlap */
+.content {
+  padding-top: 50px; /* Add padding top to content to avoid overlap with fixed header */
+}

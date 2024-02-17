@@ -47,7 +47,7 @@ function Register() {
 
       alert('User registered successfully');
       
-      navigate('/Login');
+      navigate('/login');
       console.log('done');
     } catch (error) {
       console.error('This is the error:', error);

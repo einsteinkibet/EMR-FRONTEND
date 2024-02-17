@@ -7,6 +7,7 @@ function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("receptionist");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ function Login() {
 
       if (response.ok) {
         alert(data.message);
-        navigate("/properties"); // Use navigate for redirection
+        navigate(`/${role}`);
       } else {
         alert(data.message);
       }
@@ -56,6 +57,14 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
+        <label>Select Role</label>
+        <br />
+        <select value={role} onChange={(e) => setRole(e.target.value)}>
+          <option value="receptionist">Receptionist</option>
+          <option value="nurse">Nurse</option>
+          <option value="doctor">Doctor</option>
+          <option value="admin">Admin</option>
+        </select>
         <button className="submit--field" type="submit">
           Login
         </button>

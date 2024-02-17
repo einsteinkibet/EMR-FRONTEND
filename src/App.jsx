@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Receptionist from './components/receptionist/Receptionist';
 import Nurse from './components/nurse/Nurse';
@@ -9,15 +10,14 @@ import Register from './components/register/Register'
 import Login from "./components/login/Login";
 
 import './App.css';
-// import Patient_list from './components/patient_list/Patient_list';
 
 const App = () => {
   return (
-    <>
     <BrowserRouter>
-    <Header/>
+      <Header />
       <Routes>
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/" exact element={<Login />} />
         <Route path="/receptionist" element={<Receptionist />} />
         <Route path="/nurse" element={<Nurse />} />
@@ -26,7 +26,6 @@ const App = () => {
         <Route path="/patients/:PatientID/edit_description" element={<Edit_description />} />
       </Routes>
     </BrowserRouter>
-    </>
   );
 };
 
