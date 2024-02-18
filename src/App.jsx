@@ -22,8 +22,8 @@ const App = () => {
         <Route path="/receptionist" element={<Receptionist />} />
         <Route path="/nurse" element={<Nurse />} />
         <Route path="/doctor" element={<Doctor />} />
-        <Route path="/patients/:id" element={<Patient_details />} />
-        <Route path="/patients/:PatientID/edit_description" element={<Edit_description />} />
+        <Route path="/patient/:id" element={<Patient_details />} />
+        <Route path="/patient/:id/edit_description" element={<Edit_description />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,53 +1,56 @@
-// EditDescription.js
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './Edit_description.css';
 
 const Edit_description = () => {
-  const { PatientID } = useParams();
+  const { id } = useParams();
   const [patient, setPatient] = useState(null);
   const [editedDescription, setEditedDescription] = useState('');
-  const [descriptionEdited, setDescriptionEdited] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPatient = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5555/patient/patients/${PatientID}`);
+        const response = await fetch(`http://127.0.0.1:5555/patient/${id}`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        setPatient(data);
-        setEditedDescription(data.Description || ''); // Initialize editedDescription with the current description
+        console.log('Fetched patient data:', data); // Log the fetched data
+        if (data.length > 0) {
+          setPatient(data[0]); // Select the first element of the array
+          // Initialize editedDescription with the current description if available, else set it to an empty string
+          setEditedDescription(data[0].description || ''); 
+        }
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching patient data:', error);
       }
     };
-
+  
     fetchPatient();
-  }, [PatientID]);
+  }, [id]);
+  
 
   const handleDescriptionChange = (e) => {
     setEditedDescription(e.target.value);
-    setDescriptionEdited(true); // Mark the description as edited
   };
 
   const handleDescriptionSubmit = async () => {
     try {
-      const response = await fetch(`http://127.0.0.1:5555/patient/patients/${PatientID}`, {
+      const response = await fetch(`http://127.0.0.1:5555/patient/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ Description: editedDescription }),
+        body: JSON.stringify({ description: editedDescription }),
       });
       if (response.ok) {
         alert('Description updated successfully!');
-        // You can handle the transfer of the edited patient to the doctor's dashboard here
+        // Navigate back to the previous page
+        window.history.back();
       } else {
         alert('Failed to update description. Please try again.');
-        await onDescriptionUpdate(patient.PatientID, editedDescription);
-
       }
     } catch (error) {
       console.error('Error:', error);
@@ -55,14 +58,18 @@ const Edit_description = () => {
     }
   };
 
+  if (loading) {
+    return <div className="edit-description-container">Loading...</div>;
+  }
+
   return (
-    <div>
+    <div className="edit-description-container">
       <h1>Edit Description</h1>
-      <h2>{patient && `${patient.FirstName} ${patient.LastName}`}</h2>
+      <h2>{patient ? `${patient.first_name} ${patient.last_name}` : 'Loading...'}</h2>
       <p><strong>Description:</strong></p>
-      <textarea value={editedDescription} onChange={handleDescriptionChange}></textarea>
+      <textarea className="description-textarea" value={editedDescription} onChange={handleDescriptionChange}></textarea>
       <br />
-      <button onClick={handleDescriptionSubmit}>Submit</button>
+      <button className="submit-button" onClick={handleDescriptionSubmit}>Submit</button>
     </div>
   );
 };

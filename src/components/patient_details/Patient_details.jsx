@@ -5,35 +5,40 @@ import { useParams } from 'react-router-dom';
 const Patient_details = () => {
   const { id } = useParams();
   const [patient, setPatient] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch patient details from the backend using the patient ID
     const fetchPatientDetails = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5555/patient/patients/${id}`);
+        const response = await fetch(`http://127.0.0.1:5555/patient/${id}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         const data = await response.json();
-        setPatient(data);
+        setPatient(data[0]);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching patient details:', error);
+        setLoading(false); // Set loading to false even in case of error
       }
     };
-
+  
     fetchPatientDetails();
   }, [id]);
+  
 
-  if (!patient) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
       <h2>Patient Details</h2>
-      <p>Name: {patient.FirstName} {patient.LastName}</p>
-      <p>Date of Birth: {patient.DateOfBirth}</p>
-      <p>Gender: {patient.Gender}</p>
-      <p>Contact Number: {patient.ContactNumber}</p>
-      <p>Address: {patient.Address}</p>
-      <p>Description: {patient.Description}</p>
+      <p>Name: {patient.first_name} {patient.last_name}</p>
+      <p>Age: {patient.age}</p>
+      <p>Gender: {patient.gender}</p>
+      <p>Contact Number: {patient.contact_number}</p>
+      <p>Description: {patient.description}</p>
     </div>
   );
 };

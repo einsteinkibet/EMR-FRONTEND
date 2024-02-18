@@ -5,12 +5,13 @@ import './Patient_list.css';
 const Patient_list = () => {
   const [patients, setPatients] = useState([]);
   const [userRole, setUserRole] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     console.log('Fetching data...');
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5555/patient/patients');
+        const response = await fetch('http://127.0.0.1:5555/patient');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -44,16 +45,16 @@ const Patient_list = () => {
       <h2 className='title'>Patient List</h2>
       <ol className="patient-list">
         {patients.map(patient => (
-          <li key={patient.PatientID} className="patient-item">
+          <li key={patient.id} className="patient-item">
             <div className="patient-info">
-              <strong>{patient.FirstName} {patient.LastName}</strong>
-              <p>{patient.Description || 'No description available'}</p>
+              <strong>{patient.first_name} {patient.last_name}</strong>
+              <p>{patient.description || 'No description available'}</p>
             </div>
             <div className="patient-actions">
               {canEditDescription() && (
-                <Link to={`/patients/${patient.PatientID}/edit_description`} className="action-link">Edit Description</Link>
+                <Link to={`/patient/${patient.id}/edit_description`} className="action-link">Edit Description</Link>
               )}
-              <Link to={`/patients/${patient.PatientID}`} className="action-link">View Details</Link>
+              <Link to={`/patient/${patient.id}`} className="action-link">View Details</Link>
             </div>
           </li>
         ))}

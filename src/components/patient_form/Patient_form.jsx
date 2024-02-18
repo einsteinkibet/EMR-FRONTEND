@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './Patient_form.css';
 
-const Patient_form = () => {
+const PatientForm = () => {
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -10,7 +10,7 @@ const Patient_form = () => {
     gender: '',
     contact_number: '',
     address: '',
-    Description: '',
+    description: '',
   });
 
   const handleChange = (e) => {
@@ -24,37 +24,7 @@ const Patient_form = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:5555/patient/patients', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          FirstName: formData.first_name,
-          LastName: formData.last_name,
-          DateOfBirth: formData.date_of_birth,
-          Gender: formData.gender,
-          ContactNumber: formData.contact_number,
-          Address: formData.address,
-          Description:formData.Description,
-        }),
-      });
-
-      if (response.ok) {
-        console.log('Patient registered successfully!');
-        // Optionally, reset the form after successful submission
-        setFormData({
-          first_name: '',
-          last_name: '',
-          date_of_birth: '',
-          gender: '',
-          contact_number: '',
-          address: '',
-          Description: '',
-        });
-      } else {
-        console.error('Failed to register patient.');
-      }
+      // Your submit logic here
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -73,7 +43,6 @@ const Patient_form = () => {
         <label>Date Of Birth:</label>
         <input type="date" name="date_of_birth" value={formData.date_of_birth} onChange={handleChange} />
 
-
         <label>Gender:</label>
         <input type="text" name="gender" value={formData.gender} onChange={handleChange} />
 
@@ -84,7 +53,7 @@ const Patient_form = () => {
         <textarea name="address" value={formData.address} onChange={handleChange} />
 
         <label>Description:</label>
-        <textarea name="description" value={formData.Description} onChange={handleChange} />
+        <textarea name="description" value={formData.description} onChange={handleChange} disabled={true} />
 
         <button type="submit">Register</button>
       </form>
@@ -92,4 +61,4 @@ const Patient_form = () => {
   );
 };
 
-export default Patient_form;
+export default PatientForm;
