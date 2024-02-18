@@ -54,7 +54,7 @@ const Patient_list = () => {
               {canEditDescription() && (
                 <Link to={`/patient/${patient.id}/edit_description`} className="action-link">Edit Description</Link>
               )}
-              <Link to={`/patient/${patient.id}`} className="action-link">View Details</Link>
+              <Link to={`/patients/${patient.id}`} className="action-link">View Details</Link>
             </div>
           </li>
         ))}
