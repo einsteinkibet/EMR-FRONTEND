@@ -6,7 +6,7 @@ const PatientForm = () => {
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
-    date_of_birth: '',
+    age: '',
     gender: '',
     contact_number: '',
     address: '',
@@ -24,7 +24,29 @@ const PatientForm = () => {
     e.preventDefault();
 
     try {
-      // Your submit logic here
+      const response = await fetch('http://127.0.0.1:5555/patient', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log('Patient registered successfully!');
+        // Optionally, reset the form after successful submission
+        setFormData({
+          first_name: '',
+          last_name: '',
+          age: '',
+          gender: '',
+          contact_number: '',
+          address: '',
+          description: '',
+        });
+      } else {
+        console.error('Failed to register patient.');
+      }
     } catch (error) {
       console.error('Error:', error.message);
     }
@@ -40,8 +62,8 @@ const PatientForm = () => {
         <label>Last Name:</label>
         <input type="text" name="last_name" value={formData.last_name} onChange={handleChange} />
 
-        <label>Date Of Birth:</label>
-        <input type="date" name="date_of_birth" value={formData.date_of_birth} onChange={handleChange} />
+        <label>Age:</label>
+        <input type="number" name="age" value={formData.age} onChange={handleChange} />
 
         <label>Gender:</label>
         <input type="text" name="gender" value={formData.gender} onChange={handleChange} />
@@ -53,7 +75,7 @@ const PatientForm = () => {
         <textarea name="address" value={formData.address} onChange={handleChange} />
 
         <label>Description:</label>
-        <textarea name="description" value={formData.description} onChange={handleChange} disabled={true} />
+        <textarea name="description" value={formData.description} onChange={handleChange} />
 
         <button type="submit">Register</button>
       </form>
