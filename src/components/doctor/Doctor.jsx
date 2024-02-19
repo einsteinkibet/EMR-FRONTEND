@@ -37,7 +37,6 @@ const Doctor = () => {
     <div>
       <h1 className='doctor-title'>Doctor Dashboard</h1>
       <PatientList patients={patients} />
-      <Link to="/book-appointment">Book Appointment</Link>
     </div>
   );
 };

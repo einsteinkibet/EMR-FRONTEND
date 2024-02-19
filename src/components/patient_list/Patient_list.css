@@ -42,7 +42,9 @@ body{
     text-decoration: none;
     color: #007bff;
 }
-
+button{
+    color: #007bff;
+}
 .action-link:hover {
     text-decoration: underline;
 }

@@ -37,8 +37,10 @@
     width: 50%;
     border-radius: 5px;
     outline: none;
-    border: none;
-}
+    border: 1px solid #ccc; /* Light gray border */
+    padding: 0 15px;
+    font-size: 16px;
+  }
 .submit--field{
     height: 40px;
     width: 40%;

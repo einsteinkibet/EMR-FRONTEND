@@ -5,6 +5,7 @@ import './Patient_list.css';
 const Patient_list = () => {
   const [patients, setPatients] = useState([]);
   const [userRole, setUserRole] = useState('');
+  const [visible, setVisible] = useState(false)
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const Patient_list = () => {
     // Example: Only allow nurses to edit the description
     return userRole === 'Nurse';
   };
-
+  
   return (
     <div className="patient-list-container">
       <h2 className='title'>Patient List</h2>
@@ -51,11 +52,16 @@ const Patient_list = () => {
               <p>{patient.description || 'No description available'}</p>
             </div>
             <div className="patient-actions">
+              <button>
               {canEditDescription() && (
                 <Link to={`/patient/${patient.id}/edit_description`} className="action-link">Edit Description</Link>
-              )}
-              <Link to={`/patients/${patient.id}`} className="action-link">View Details</Link>
+              )}</button>
+              <button>
+                <Link to={`/patient/${patient.id}`} className="action-link">View Details</Link>
+              </button>
+              <button >schedule appointment</button>
             </div>
+            {/* <button className='book-btn'>schedule appointment</button> */}
           </li>
         ))}
       </ol>
