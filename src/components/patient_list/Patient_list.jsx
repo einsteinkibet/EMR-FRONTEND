@@ -40,6 +40,29 @@ const Patient_list = () => {
     // Example: Only allow nurses to edit the description
     return userRole === 'Nurse';
   };
+
+  const handleScheduleAppointment = async (patientId) => {
+    try {
+      const response = await fetch('http://127.0.0.1:5555/appointments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          appointment_number: Math.floor(Math.random() * 1000), // Generate a random appointment number
+          patient_id: patientId
+        })
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log('Appointment created:', data);
+      // You can update the UI to reflect the newly created appointment if needed
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+    }
+  };
   
   return (
     <div className="patient-list-container">
@@ -52,16 +75,16 @@ const Patient_list = () => {
               <p>{patient.description || 'No description available'}</p>
             </div>
             <div className="patient-actions">
-              <button>
               {canEditDescription() && (
-                <Link to={`/patient/${patient.id}/edit_description`} className="action-link">Edit Description</Link>
-              )}</button>
+                <button>
+                  <Link to={`/patient/${patient.id}/edit_description`} className="action-link">Edit Description</Link>
+                </button>
+              )}
+              <button onClick={() => handleScheduleAppointment(patient.id)}>Schedule Appointment</button>
               <button>
                 <Link to={`/patient/${patient.id}`} className="action-link">View Details</Link>
               </button>
-              <button >schedule appointment</button>
             </div>
-            {/* <button className='book-btn'>schedule appointment</button> */}
           </li>
         ))}
       </ol>
