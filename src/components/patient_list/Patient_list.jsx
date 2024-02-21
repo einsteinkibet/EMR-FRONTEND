@@ -71,7 +71,7 @@ const Patient_list = () => {
         {patients.map(patient => (
           <li key={patient.id} className="patient-item">
             <div className="patient-info">
-              <strong>{patient.first_name} {patient.last_name}</strong>
+              <strong className='names'>{patient.first_name} {patient.last_name}</strong>
               <p>{patient.description || 'No description available'}</p>
             </div>
             <div className="patient-actions">

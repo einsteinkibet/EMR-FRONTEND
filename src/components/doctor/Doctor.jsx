@@ -36,6 +36,8 @@ const Doctor = () => {
   return (
     <div>
       <h1 className='doctor-title'>Doctor Dashboard</h1>
+      <Link className="nav-link active" aria-current="page" to="/pending" style={{ color: "white", textDecoration: "underline", marginRight: '3rem' }}>View Pending Appointments</Link>
+
       <PatientList patients={patients} />
     </div>
   );

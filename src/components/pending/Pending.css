@@ -1,0 +1,33 @@
+/* Pending.css */
+.pending-container {
+    margin-top: 20px;
+  }
+  
+  .pending-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .appointment-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .appointment-item {
+    /* background-color: #f9f9f9; */
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .appointment-info {
+    margin-bottom: 10px;
+  }
+  
+  .appointment-info p {
+    margin: 5px 0;
+  }
+  
+  /* Add more styles as needed */
+  

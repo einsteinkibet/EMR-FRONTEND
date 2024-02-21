@@ -8,6 +8,7 @@ function Login({ handleLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("receptionist"); // Default role is receptionist
+  const [errorMessage, setErrorMessage] = useState(""); // State to store error message
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,7 +49,7 @@ function Login({ handleLogin }) {
             break;
         }
       } else {
-        alert(data.message);
+        setErrorMessage(data.message); // Set error message if login fails
       }
     } catch (error) {
       console.error("Error:", error);
@@ -92,6 +93,8 @@ function Login({ handleLogin }) {
         </button>
       </form>
 
+      {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message if present */}
+      
       <h4>Don't have an account? <Link to='/register'>Register</Link></h4>
     </div>
   );

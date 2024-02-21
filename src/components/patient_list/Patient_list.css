@@ -32,10 +32,14 @@ body{
 .patient-info {
     margin-bottom: 10px;
 }
-
+.names{
+    color:#007bff
+}
 .patient-actions {
     display: flex;
     justify-content: space-between;
+    height: 60px;
+    margin-bottom: 0px;
 }
 
 .action-link {

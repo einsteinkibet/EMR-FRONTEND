@@ -52,7 +52,7 @@ function Register() {
 
       alert('User registered successfully');
       
-      navigate('/Login');
+      navigate('/admin');
       console.log('done');
     } catch (error) {
       console.error('This is the error:', error);

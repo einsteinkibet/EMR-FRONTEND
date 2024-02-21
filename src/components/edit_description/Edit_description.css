@@ -14,7 +14,8 @@
 
 .edit-description-container h2 {
   font-size: 28px; /* Increase font size for subheading */
-  margin-bottom: 20px; /* Increase margin for better spacing */
+  margin-bottom: 20px;
+ /* Increase margin for better spacing */
 }
 
 .description-textarea {
@@ -22,15 +23,15 @@
   height: 500px; /* Increase height by 2.5 times */
   padding: 20px; /* Increase padding for better spacing */
   font-size: 20px; /* Increase font size for better readability */
-  margin-bottom: 30px; /* Increase margin for better spacing */
+  margin-bottom: 30px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  resize: vertical; /* Allow vertical resizing */
+  resize: vertical;
 }
 
 .submit-button {
-  padding: 15px 30px; /* Increase padding for better button size */
-  font-size: 24px; /* Increase font size for better readability */
+  padding: 15px 30px; 
+  font-size: 24px; 
   background-color: #007bff;
   color: #fff;
   border: none;
