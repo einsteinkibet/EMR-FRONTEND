@@ -7,6 +7,9 @@ const Edit_description = () => {
   const [patient, setPatient] = useState(null);
   const [editedDescription, setEditedDescription] = useState('');
   const [loading, setLoading] = useState(true);
+  const [medicinePrescribed, setMedicinePrescribed] = useState('');
+  const [diagnosedWith, setDiagnosedWith] = useState('');
+  const [comeBackDate, setComeBackDate] = useState('');
 
   useEffect(() => {
     const fetchPatient = async () => {
@@ -16,21 +19,19 @@ const Edit_description = () => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        console.log('Fetched patient data:', data); // Log the fetched data
+        console.log('Fetched patient data:', data);
         if (data.length > 0) {
-          setPatient(data[0]); // Select the first element of the array
-          // Initialize editedDescription with the current description if available, else set it to an empty string
-          setEditedDescription(data[0].description || ''); 
+          setPatient(data[0]);
+          setEditedDescription(data[0].description || '');
         }
         setLoading(false);
       } catch (error) {
         console.error('Error fetching patient data:', error);
       }
     };
-  
+
     fetchPatient();
   }, [id]);
-  
 
   const handleDescriptionChange = (e) => {
     setEditedDescription(e.target.value);
@@ -43,11 +44,13 @@ const Edit_description = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ description: editedDescription }),
+        body: JSON.stringify({ 
+          description: editedDescription,
+          summarized_description: `${diagnosedWith}, ${medicinePrescribed}, ${comeBackDate}` 
+        }),
       });
       if (response.ok) {
         alert('Description updated successfully!');
-        // Navigate back to the previous page
         window.history.back();
       } else {
         alert('Failed to update description. Please try again.');
@@ -68,6 +71,15 @@ const Edit_description = () => {
       <h2>{patient ? `${patient.first_name} ${patient.last_name}` : 'Loading...'}</h2>
       <p><strong>Description:</strong></p>
       <textarea className="description-textarea" value={editedDescription} onChange={handleDescriptionChange}></textarea>
+      <br />
+      <label>Medicine Prescribed:</label>
+      <input type="text" value={medicinePrescribed} onChange={(e) => setMedicinePrescribed(e.target.value)} />
+      <br />
+      <label>Diagnosed With:</label>
+      <input type="text" value={diagnosedWith} onChange={(e) => setDiagnosedWith(e.target.value)} />
+      <br />
+      <label>Come Back Date:</label>
+      <input type="date" value={comeBackDate} onChange={(e) => setComeBackDate(e.target.value)} />
       <br />
       <button className="submit-button" onClick={handleDescriptionSubmit}>Submit</button>
     </div>

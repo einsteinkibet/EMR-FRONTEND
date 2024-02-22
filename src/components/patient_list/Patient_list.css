@@ -8,6 +8,7 @@ body{
     text-align: center;
     margin-bottom: 0px;
     scroll-behavior: smooth;
+    max-width: 500px;
 }
 
 .title {

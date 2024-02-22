@@ -38,7 +38,14 @@ const Patient_details = () => {
       <p>Age: {patient.age}</p>
       <p>Gender: {patient.gender}</p>
       <p>Contact Number: {patient.contact_number}</p>
+      <p>location:{patient.location_input}</p>
       <p>Description: {patient.description}</p>
+      <p>served by:
+        {patient.doctor ? patient.doctor.username : 'Doctor not specified'}
+        {patient.receptionist ? ` ${patient.receptionist.username}` : ' Receptionist not specified'}
+        {patient.nurse ? ` ${patient.nurse.username}` : ' Nurse not specified'}
+      </p>
+      <p>summary:{patient.summarized_description}</p>
     </div>
   );
 };

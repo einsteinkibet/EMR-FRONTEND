@@ -11,6 +11,10 @@ const PatientForm = () => {
     contact_number: '',
     address: '',
     description: '',
+    date_served:'',
+    location_input:'',
+    summarized_description: '',
+    nurse_id: '',
   });
 
   const handleChange = (e) => {
@@ -24,7 +28,7 @@ const PatientForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:5555/patient', {
+      const response = await fetch('http://127.0.0.1:5555/patients', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,6 +47,10 @@ const PatientForm = () => {
           contact_number: '',
           address: '',
           description: '',
+          date_served:'',
+          location_input:'',
+          summarized_description: '',
+          nurse_id: '',
         });
       } else {
         console.error('Failed to register patient.');
@@ -67,7 +75,7 @@ const PatientForm = () => {
 
         <label>Gender:</label>
         <input type="text" name="gender" value={formData.gender} onChange={handleChange} />
-
+[]
         <label>Contact Number:</label>
         <input type="text" name="contact_number" value={formData.contact_number} onChange={handleChange} />
 
@@ -76,6 +84,17 @@ const PatientForm = () => {
 
         <label>Description:</label>
         <textarea name="description" value={formData.description} onChange={handleChange} />
+
+        <label>Date Served:</label>
+        <input type="date" name="date_served" value={formData.date_served} onChange={handleChange} />
+        
+        <label>Location Input:</label>
+        <input type="text" name="location_input" value={formData.location_input} onChange={handleChange} />
+        
+        <input type="hidden" name="summarized_description" value={formData.summarized_description} onChange={handleChange} />
+
+        <input type="hidden" name="nurse_id" value={formData.nurse_id} />
+
 
         <button type="submit">Register</button>
       </form>
