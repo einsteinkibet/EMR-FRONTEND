@@ -7,7 +7,7 @@ function Login({ handleLogin }) {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("receptionist"); // Default role is receptionist
+  const [role, setRole] = useState("receptionist");
   const [errorMessage, setErrorMessage] = useState(""); // State to store error message
 
   const handleSubmit = async (e) => {
