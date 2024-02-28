@@ -10,7 +10,7 @@ const Nurse = () => {
     <div>
       <h1 className='nurse-title'>Nurse Dashboard</h1>
       <Patient_list />
-      <Link to="/edit-description/:patientID">Edit Description</Link>
+      <Link to="/edit-description/:id">Edit Description</Link>
     </div>
   );
 };

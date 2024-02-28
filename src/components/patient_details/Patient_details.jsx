@@ -1,6 +1,6 @@
-// PatientDetails.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import './Patient_details.css'; // Import CSS file
 
 const Patient_details = () => {
   const { id } = useParams();
@@ -15,7 +15,7 @@ const Patient_details = () => {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        setPatient(data[0]);
+        setPatient(data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching patient details:', error);
@@ -28,24 +28,60 @@ const Patient_details = () => {
   
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
+  }
+
+  if (!patient) {
+    return <div className="error">No patient found</div>;
   }
 
   return (
-    <div>
+    <div className="patient-details-container">
       <h2>Patient Details</h2>
-      <p>Name: {patient.first_name} {patient.last_name}</p>
-      <p>Age: {patient.age}</p>
-      <p>Gender: {patient.gender}</p>
-      <p>Contact Number: {patient.contact_number}</p>
-      <p>location:{patient.location_input}</p>
-      <p>Description: {patient.description}</p>
-      <p>served by:
-        {patient.doctor ? patient.doctor.username : 'Doctor not specified'}
-        {patient.receptionist ? ` ${patient.receptionist.username}` : ' Receptionist not specified'}
-        {patient.nurse ? ` ${patient.nurse.username}` : ' Nurse not specified'}
-      </p>
-      <p>summary:{patient.summarized_description}</p>
+      <table className="patient-details-table">
+        <tbody>
+          <tr>
+            <td><strong>Name:</strong></td>
+            <td>{patient.first_name} {patient.last_name}</td>
+          </tr>
+          <tr>
+            <td><strong>Age:</strong></td>
+            <td>{patient.age}</td>
+          </tr>
+          <tr>
+            <td><strong>Gender:</strong></td>
+            <td>{patient.gender}</td>
+          </tr>
+          <tr>
+            <td><strong>Contact Number:</strong></td>
+            <td>{patient.contact_number}</td>
+          </tr>
+          <tr>
+            <td><strong>Location:</strong></td>
+            <td>{patient.location_input}</td>
+          </tr>
+          <tr>
+            <td><strong>Description:</strong></td>
+            <td>{patient.description}</td>
+          </tr>
+          <tr>
+            <td><strong>Doctor:</strong></td>
+            <td>{patient.doctor}</td>
+          </tr>
+          <tr>
+            <td><strong>Disease:</strong></td>
+            <td>{patient.disease}</td>
+          </tr>
+          <tr>
+            <td><strong>Medicine Prescribed:</strong></td>
+            <td>{patient.medicine}</td>
+          </tr>
+          <tr>
+            <td><strong>Date Served:</strong></td>
+            <td>{patient.date_served}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

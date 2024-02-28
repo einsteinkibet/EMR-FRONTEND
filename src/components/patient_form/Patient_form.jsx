@@ -13,8 +13,11 @@ const PatientForm = () => {
     description: '',
     date_served:'',
     location_input:'',
-    summarized_description: '',
-    nurse_id: '',
+    disease: '',
+    medicine: '',
+    summarized_descrition: '',
+    served_by: '',
+    doctor: '',
   });
 
   const handleChange = (e) => {
@@ -28,7 +31,7 @@ const PatientForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:5555/patients', {
+      const response = await fetch('http://127.0.0.1:5555/patient', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,8 +52,12 @@ const PatientForm = () => {
           description: '',
           date_served:'',
           location_input:'',
-          summarized_description: '',
-          nurse_id: '',
+          summarized_descrition: '',
+          served_by: '',
+          disease: '',
+          medicine: '',
+          doctor: '',
+          
         });
       } else {
         console.error('Failed to register patient.');
@@ -75,7 +82,7 @@ const PatientForm = () => {
 
         <label>Gender:</label>
         <input type="text" name="gender" value={formData.gender} onChange={handleChange} />
-[]
+
         <label>Contact Number:</label>
         <input type="text" name="contact_number" value={formData.contact_number} onChange={handleChange} />
 
@@ -88,13 +95,18 @@ const PatientForm = () => {
         <label>Date Served:</label>
         <input type="date" name="date_served" value={formData.date_served} onChange={handleChange} />
         
-        <label>Location Input:</label>
+        <label>Hospital Served:</label>
         <input type="text" name="location_input" value={formData.location_input} onChange={handleChange} />
         
-        <input type="hidden" name="summarized_description" value={formData.summarized_description} onChange={handleChange} />
+        <input type="hidden" name="summarized_description" value={formData.summarized_descrition} onChange={handleChange} />
 
-        <input type="hidden" name="nurse_id" value={formData.nurse_id} />
+        <input type="hidden" name="served_by" value={formData.served_by} onChange={handleChange} />
 
+        <input type="hidden" name="medicine" value={formData.medicine} onChange={handleChange} />
+
+        <input type="hidden" name="disease" value={formData.disease} onChange={handleChange} />
+
+        <input type="hidden" name="doctor" value={formData.doctor} onChange={handleChange} />
 
         <button type="submit">Register</button>
       </form>

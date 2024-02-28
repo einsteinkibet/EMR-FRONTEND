@@ -1,0 +1,33 @@
+.patient-details-container {
+    background-image: url('https://images.unsplash.com/photo-1625134673337-519d4d10b313?q=80&w=1538&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+  }
+  
+  .patient-details-table {
+    width: 100%;
+  }
+  
+  .patient-details-table td {
+    padding: 5px 10px;
+    border-bottom: 1px solid #fff;
+  }
+  
+  .patient-details-table td:first-child {
+    font-weight: bold;
+    width: 30%;
+  }
+  
+  .loading {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .error {
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+  }
+  

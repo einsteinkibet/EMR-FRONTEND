@@ -95,7 +95,7 @@ function Login({ handleLogin }) {
 
       {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message if present */}
       
-      <h4>Don't have an account? <Link to='/register'>Register</Link></h4>
+      <h4>Don't have an account? Contact admin</h4>
     </div>
   );
 }

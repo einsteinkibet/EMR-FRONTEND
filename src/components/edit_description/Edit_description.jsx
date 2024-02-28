@@ -7,31 +7,42 @@ const Edit_description = () => {
   const [patient, setPatient] = useState(null);
   const [editedDescription, setEditedDescription] = useState('');
   const [loading, setLoading] = useState(true);
-  const [medicinePrescribed, setMedicinePrescribed] = useState('');
-  const [diagnosedWith, setDiagnosedWith] = useState('');
-  const [comeBackDate, setComeBackDate] = useState('');
+  const [medicine, setMedicine] = useState('');
+  const [disease, setDisease] = useState('');
+  const [date_served, setDate_served] = useState('');
+  const [doctor, setDoctor] = useState('');
+
 
   useEffect(() => {
     const fetchPatient = async () => {
       try {
+        console.log('Fetching patient data...');
         const response = await fetch(`http://127.0.0.1:5555/patient/${id}`);
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
         console.log('Fetched patient data:', data);
-        if (data.length > 0) {
-          setPatient(data[0]);
-          setEditedDescription(data[0].description || '');
+        if (data && Object.keys(data).length > 0) {
+          console.log('Setting patient data...');
+          setPatient(data);
+          console.log('Setting edited description...');
+          setEditedDescription(data.description || '');
+        } else {
+          console.log('No patient data found.');
         }
         setLoading(false);
       } catch (error) {
         console.error('Error fetching patient data:', error);
+        setLoading(false); // Ensure loading state is set to false even in case of error
       }
     };
-
+  
     fetchPatient();
   }, [id]);
+  
+  
+  
 
   const handleDescriptionChange = (e) => {
     setEditedDescription(e.target.value);
@@ -46,7 +57,10 @@ const Edit_description = () => {
         },
         body: JSON.stringify({ 
           description: editedDescription,
-          summarized_description: `${diagnosedWith}, ${medicinePrescribed}, ${comeBackDate}` 
+          medicine: medicine,
+          date_served: date_served,
+          disease: disease,
+          doctor:doctor
         }),
       });
       if (response.ok) {
@@ -73,14 +87,18 @@ const Edit_description = () => {
       <textarea className="description-textarea" value={editedDescription} onChange={handleDescriptionChange}></textarea>
       <br />
       <label>Medicine Prescribed:</label>
-      <input type="text" value={medicinePrescribed} onChange={(e) => setMedicinePrescribed(e.target.value)} />
+      <input type="text" value={medicine} onChange={(e) => setMedicine(e.target.value)} />
       <br />
       <label>Diagnosed With:</label>
-      <input type="text" value={diagnosedWith} onChange={(e) => setDiagnosedWith(e.target.value)} />
+      <input type="text" value={disease} onChange={(e) => setDisease(e.target.value)} />
       <br />
-      <label>Come Back Date:</label>
-      <input type="date" value={comeBackDate} onChange={(e) => setComeBackDate(e.target.value)} />
+      <label>Date served:</label>
+      <input type="date" value={date_served} onChange={(e) => setDate_served(e.target.value)} />
       <br />
+      <label>Served By</label>
+      <input type="text" value={doctor} onChange={(e) => setDoctor(e.target.value)} />
+      <br />
+
       <button className="submit-button" onClick={handleDescriptionSubmit}>Submit</button>
     </div>
   );

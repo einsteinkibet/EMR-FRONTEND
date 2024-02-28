@@ -1,43 +1,68 @@
+/* Edit_description.css */
+
+/* Container styles */
 .edit-description-container {
-  max-width: 1500px; /* Increase max-width for responsiveness */
+  max-width: 800px; /* Adjust the maximum width as needed */
   margin: 0 auto;
-  padding: 50px; /* Increase padding for better spacing */
-  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #f9f9f9;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width:100vw;
 }
 
+/* Title styles */
 .edit-description-container h1 {
-  font-size: 36px; /* Increase font size for heading */
-  margin-bottom: 30px; /* Increase margin for better spacing */
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
 }
 
+/* Patient name styles */
 .edit-description-container h2 {
-  font-size: 28px; /* Increase font size for subheading */
+  font-size: 20px;
   margin-bottom: 20px;
- /* Increase margin for better spacing */
+  color: #555;
 }
 
+/* Description styles */
 .description-textarea {
-  width: 1000px; /* Increase width by 2.5 times */
-  height: 500px; /* Increase height by 2.5 times */
-  padding: 20px; /* Increase padding for better spacing */
-  font-size: 20px; /* Increase font size for better readability */
-  margin-bottom: 30px;
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 5px;
   resize: vertical;
 }
 
+/* Input label styles */
+.edit-description-container label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Input field styles */
+.edit-description-container input[type="text"],
+.edit-description-container input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Submit button styles */
 .submit-button {
-  padding: 15px 30px; 
-  font-size: 24px; 
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 16px;
 }
 
 .submit-button:hover {

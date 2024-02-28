@@ -106,7 +106,6 @@ function Register() {
           Register
         </button>
         <h4 className='already-have-account'>Already have an Account?
-          <Link to='/login'>Login</Link>
         </h4>
       </form>
     </div>
