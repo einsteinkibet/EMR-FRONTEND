@@ -14,6 +14,8 @@ import Pending from './components/pending/Pending';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userCount, setUserCount] = useState([]);
+
 
   const handleLogin = () => {
     setIsLoggedIn(true);
