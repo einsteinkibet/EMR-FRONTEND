@@ -11,6 +11,7 @@ const Edit_description = () => {
   const [disease, setDisease] = useState('');
   const [date_served, setDate_served] = useState('');
   const [doctor, setDoctor] = useState('');
+  const [location_input, setLocation_input] = useState('');
 
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const Edit_description = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching patient data:', error);
-        setLoading(false); // Ensure loading state is set to false even in case of error
+        setLoading(false);
       }
     };
   
@@ -60,7 +61,8 @@ const Edit_description = () => {
           medicine: medicine,
           date_served: date_served,
           disease: disease,
-          doctor:doctor
+          doctor:doctor,
+          location_input: location_input,
         }),
       });
       if (response.ok) {
@@ -97,6 +99,10 @@ const Edit_description = () => {
       <br />
       <label>Served By</label>
       <input type="text" value={doctor} onChange={(e) => setDoctor(e.target.value)} />
+      <br />
+      <label>Location</label>
+      <input type="text" value={location_input} onChange={(e) => setLocation_input(e.target.value)} />
+
       <br />
 
       <button className="submit-button" onClick={handleDescriptionSubmit}>Submit</button>

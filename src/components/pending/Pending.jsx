@@ -32,10 +32,8 @@ const Pending = () => {
           <div key={appointment.id} className="appointment-item">
             <div className="appointment-info">
               <p><strong>Appointment Number:</strong> {appointment.appointment_number}</p>
-              <p><strong>Patient ID:</strong> {appointment.patient_name}</p>
-              {/* Add more appointment details as needed */}
+              <p><strong>Patient:</strong> {appointment.patient_id}</p>
             </div>
-            {/* Add buttons or actions for each appointment */}
           </div>
         ))}
       </div>

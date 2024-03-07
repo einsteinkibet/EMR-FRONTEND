@@ -40,8 +40,8 @@ const PatientForm = () => {
       });
 
       if (response.ok) {
+        alert('Patient registered successfully, wait for an appointment!');
         console.log('Patient registered successfully!');
-        // Optionally, reset the form after successful submission
         setFormData({
           first_name: '',
           last_name: '',
